@@ -28,25 +28,44 @@ public class Main {
                 continue;
             }
             guesses[i++] = guess;
-            if (guess == number) {
-                status = true;
-                break;
+            if (health > 1) {
+                if (guess == number) {
+                    status = true;
+                    break;
+                } else if (guess > number) {
+                    System.out.println(Color.CYAN + "False, please try again ! Health : " + --health + Color.RESET);
+                    System.out.println("DOWN");
+                } else {
+                    System.out.println(Color.CYAN + "False, please try again ! Health : "  + --health + Color.RESET);
+                    System.out.println("UP");
+                }
             } else {
-                System.out.println(Color.CYAN + "False, please try again ! Health : " + Color.RESET + --health);
+                if (guess == number) {
+                    status = true;
+                    break;
+                } else if (guess > number) {
+                    System.out.println(Color.CYAN + "Your health is : " + --health + Color.RESET);
+                } else {
+                    System.out.println(Color.CYAN + "Your health is : "  + --health + Color.RESET);
+                }
             }
+
         }
         if (status) {
-            System.out.println(Color.GREEN + "Congratulations!" + Color.BLUE + "Your guess is true\n" +
+            System.out.println(Color.GREEN + "Congratulations! " + Color.BLUE + "Your guess is true\n" +
                     "The number is : " + number +
-                    "\nHealth : " + Color.RESET + health);
+                    "\nHealth : " + health + Color.RESET);
         } else {
             System.out.println(Color.RED + "You failed !" + Color.RESET);
         }
         System.out.print(Color.PURPLE + "Your guesses : " + Color.RESET);
-        for (int value :
-                guesses) {
-            if (value != 0)
-                System.out.print(Color.YELLOW + value + "-" + Color.RESET);
+
+        for (int j = 0; j < guesses.length; j++) {
+            if (guesses[j] != 0 && j < guesses.length - 1) {
+                System.out.print(Color.YELLOW + guesses[j] + "-" + Color.RESET);
+            } else {
+                System.out.print(Color.YELLOW + guesses[j] + Color.RESET);
+            }
         }
     }
 }
